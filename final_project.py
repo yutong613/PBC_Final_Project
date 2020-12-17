@@ -21,6 +21,5 @@ for url in urls:
     for i in range(len(titles)):  # 印出各個申請資料項目及對應的內容
         if i != 0:
             print(titles[i].text, infos[i+len(infos)-len(titles)].text.strip())
-            print("\n")
         else:
             print(titles[i].text, infos[i].text.strip())
