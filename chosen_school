@@ -1,0 +1,176 @@
+import urllib.request as req
+import ssl
+import bs4
+
+ssl._create_default_https_context = ssl._create_unverified_context
+url = "https://oia.ntu.edu.tw/ch/outgoing/school.list/country_sn/0"  # 國際處出國交換學校一覽表的網頁
+
+with req.urlopen(url) as response:
+    data = response.read().decode("utf-8")
+
+root = bs4.BeautifulSoup(data, "html.parser")
+urls = root.find_all("td", class_="_decoration")        
+
+all_school = []
+
+
+you = input().split(",")
+ 
+for url in urls:
+    url = "https://oia.ntu.edu.tw"+url.a["href"]  # 各個學校的申請資料網頁
+    with req.urlopen(url) as response:
+        data = response.read().decode("utf-8")
+    root = bs4.BeautifulSoup(data, "html.parser")
+    school_name = root.find("h1")  # 校名
+    titles = root.find_all("th")  # 申請資料項目：申請資格、名額、學校年曆、註冊繳費、注意事項、住宿資訊
+    infos = root.find_all("td")  # 申請資料項目的內容
+    select = infos[0].text.strip()
+   
+    qualify = select.split("組")  # 以組分類
+    qualify.pop(0)
+  
+    for r in range(len(qualify)):
+        information = []
+        information.append(school_name.text)
+        
+        if qualify[r].find("本校") != -1:
+            grade = qualify[r][qualify[r].find("本校")+2:qualify[r].find("本校")+4]
+        else:
+            grade = 0
+            
+        if grade == "大二":
+            grade = 2
+        elif grade == "大一":
+            grade = 1
+        elif grade == "大三":
+            grade = 3
+        # if grade == "大四":
+        #     grade = 4
+        # if grade == "大五":
+        #     grade = 5
+        elif grade == "碩一":
+            grade = 6
+        elif grade == "碩二":
+            grade = 7
+        # if grade == "碩三":
+        #     grade = 8
+        elif grade == "博一":
+            grade = 9
+        elif grade == "博二":
+            grade = 10
+        # if grade == "博三":
+        #     grade = 11
+        # if grade == "博四":
+        #     grade = 12
+        # if grade == "博五":
+        #     grade = 13
+        # if grade == "博六":
+        #     grade = 14
+        information.append(grade)
+    
+        if qualify[r].find("GPA")!= -1:
+            record = qualify[r].find("GPA")
+            GPA = float(qualify[r][(record + 5):(record + 9)])
+        else:
+            GPA = 0
+        information.append(GPA)
+        
+        if qualify[r].find("TOEFL iBT")!= -1:
+            TOEFL = int(qualify[r][qualify[r].find("TOEFL iBT")+10:qualify[r].find("TOEFL iBT")+12])
+        else:
+            TOEFL = 0
+        information.append(TOEFL)
+        
+        
+        if qualify[r].find("IELTS")!= -1:
+            IELTS = float(qualify[r][qualify[r].find("IELTS")+6:qualify[r].find("IELTS")+9])
+        else:
+            IELTS = 0 
+        information.append(IELTS)
+        
+        if qualify[r].find("全民英檢")!= -1:
+            if qualify[r].find("全民英檢中級")!= -1:
+                e_test = 1
+            elif qualify[r].find("全民英檢中高級")!= -1:
+                e_test = 2
+            elif qualify[r].find("全民英檢高級")!= -1:
+                e_test = 3
+        else:
+            e_test = 0
+        information.append(e_test)
+        
+        if qualify[r].find("日文檢定") != -1:
+            japan = int(qualify[r][qualify[r].find("日文檢定")+7])*(-1)
+        else:
+            japan = 0
+        information.append(japan)
+        
+        if qualify[r].find("韓語檢定") != -1:
+            korea = int(qualify[r][qualify[r].find("韓語檢定")+14])
+        else:
+            korea = 0
+        information.append(korea)
+        
+        if qualify[r].find("法語檢定") != -1:
+            france = qualify[r][qualify[r].find("法語檢定")+7:qualify[r].find("法語檢定")+9]
+            if france == "B1":
+                france = 3
+            elif france == "B2":
+                france = 4
+            elif france == "A1":
+                france = 1
+            elif france == "A2":
+                france = 2
+            elif france == "C1":
+                france = 5 
+            elif france == "C2":
+                france = 6 
+        else:
+            france = 0
+        information.append(france)
+        
+        if qualify[r].find("德語檢定") != -1:
+            germeny = qualify[r][qualify[r].find("德語檢定")+7:qualify[r].find("德語檢定")+9]
+            if germeny == "B1":
+               germeny = 3
+            elif germeny == "B2":
+               germeny = 4
+            elif germeny == "A1":
+               germeny = 1
+            elif germeny == "A2":
+               germeny = 2
+            elif germeny == "C1":
+               germeny = 5
+            elif germeny == "C2":
+               germeny = 6    
+        else:
+            germeny = 0  
+        information.append(germeny)
+        all_school.append(information)
+
+    # for i in range(len(titles)):  # 印出各個申請資料項目及對應的內容
+    #     if i != 0:
+            
+    #         print(titles[i].text, infos[i+len(infos)-len(titles)].text.strip())
+    #         print("\n")
+    #     else:
+    #         print(titles[i].text, infos[i].text.strip())
+
+
+for i in range(len(you)):
+    you[i] = float(you[i])
+
+okay = []
+
+all_school.pop(161)
+
+for a in range(1,20):
+    if (you[1] >= all_school[a][1]) and (you[2] >= all_school[a][2]):
+        compare = 0
+        for b in range(3,10):
+            if you[b] >= float(all_school[a][b]):
+                compare += 1
+        if compare != 0:
+            okay.append(all_school[a])
+
+print(okay)
