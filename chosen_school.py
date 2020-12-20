@@ -20,7 +20,7 @@ for i in range(1, len(countries)):
 country_dict = {}
 country_dict1 = dict.fromkeys(["聖保羅大學", "里約熱內盧天主教大學", "坎皮納斯州立大學"], "巴西")
 country_dict.update(country_dict1)
-country_dict2 = dict.fromkeys(["魁北克大學蒙特婁分校", "愛德華王子島大學", "蒙特婁大學", "拉法爾大學", "女王大學", "滑鐵盧大學", "西門菲沙大學", "渥太華大學", "多倫多大學", "維多利亞大學", "加拿大英屬哥倫比亞大學(卑詩大學)"], "加拿大")
+country_dict2 = dict.fromkeys(["魁北克大學蒙特婁分校", "愛德華王子島大學", "蒙特婁大學", "拉法爾大學", "女王大學", "滑鐵盧大學", "西門菲沙大學", "渥太華大學", "多倫多大學", "維多利亞大學", "加拿大英屬哥倫比亞大學"], "加拿大")
 country_dict.update(country_dict2)
 country_dict3 = dict.fromkeys(["智利天主教大學"], "智利")
 country_dict.update(country_dict3)
