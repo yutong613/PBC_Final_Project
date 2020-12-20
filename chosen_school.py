@@ -1,6 +1,7 @@
 import urllib.request as req
 import ssl
 import bs4
+import re
 
 ssl._create_default_https_context = ssl._create_unverified_context
 url = "https://oia.ntu.edu.tw/ch/outgoing/school.list/country_sn/0"  # 國際處出國交換學校一覽表的網頁
@@ -113,7 +114,6 @@ for url in urls:
     root = bs4.BeautifulSoup(data, "html.parser")
 
     school_name = root.find("h1")  # 校名
-    school_country = country_dict[school_name]  # 國家
     titles = root.find_all("th")  # 申請資料項目：申請資格、名額、學校年曆、註冊繳費、注意事項、住宿資訊
     infos = root.find_all("td")  # 申請資料項目的內容
     select = infos[0].text.strip()
@@ -121,7 +121,7 @@ for url in urls:
     qualify = select.split("組")  # 以組分類
     qualify.pop(0)
   
-    for r in range(len(qualify)):  # 將申請資格以學校裡面的跑
+    for r in range(len(qualify)):  # 將申請資格以學校裡面的組跑
         information = []  # 每個學校的組都會有一筆資料（如果學校有兩個組，那麼以此學校為開頭的資料將有兩筆）
         information.append(school_name.text)  # 資料的第一項為學校名稱
         if qualify[r].find("本校") != -1:  # 年級前的關鍵字為學校
@@ -237,6 +237,12 @@ for url in urls:
         else:
             germeny = 0  
         information.append(germeny)  #  將第十項法語檢定量化加入資料
+        
+        pattern="[\u4e00-\u9fa5]+"  # 編碼
+        regex = re.compile(pattern)
+        school_name_chinese = regex.findall(school_name.text)  # 只取中文
+        country = country_dict.get(school_name_chinese[0])
+        information.append(country)  # 將國家加入各個學校的第十一項
         
         all_school.append(information)  # 將各個學校的資料加入總資料庫內
 
