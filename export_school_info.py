@@ -2,6 +2,7 @@ import urllib.request as req
 import ssl
 import bs4
 import re
+import csv
 
 ssl._create_default_https_context = ssl._create_unverified_context
 url = "https://oia.ntu.edu.tw/ch/outgoing/school.list/country_sn/0"  # 國際處出國交換學校一覽表的網頁
@@ -246,6 +247,11 @@ for url in urls:
         
         all_school.append(information)  # 將各個學校的資料加入總資料庫內
 
+with open('all_school.csv', 'w+', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(['學校名稱', '年級', 'GPA', 'TOEFL', '雅思', '全民英檢', '日文檢定', '韓文檢定', '法文檢定', '德文檢定', '國家'])
+    writer.writerows(all_school)
+
     # for i in range(len(titles)):  # 印出各個申請資料項目及對應的內容
     #     if i != 0:
             
@@ -256,23 +262,24 @@ for url in urls:
 
 #先將資料按照1.學校名稱 2.年級 3.GPA 4.TOEFL 5.IELTS 6.英檢 7.日檢 8.韓檢 9.法檢 10.德檢 排列
 
-# 篩選資料
-you = input().split(",")  # 假設輸入資料為一串用逗號分開的字串（輸入的資料只有九項，不用輸入學校名稱）
+# # 篩選資料
+# you = input().split(",")  # 假設輸入資料為一串用逗號分開的字串（輸入的資料只有九項，不用輸入學校名稱）
 
-for i in range(len(you)):
-    you[i] = float(you[i])  # 將數值浮點數化
+# for i in range(len(you)):
+#     you[i] = float(you[i])  # 將數值浮點數化
 
-okay = []  # 有達到標準的學校
+# okay = []  # 有達到標準的學校
 
-all_school.pop(161)  # 因為今年不招收學生
+# all_school.pop(161)  # 因為今年不招收學生
 
-for a in range(len(all_school)):  # 將所有學校有小於輸入資格的都挑選出來
-    if (you[0] >= all_school[a][1]) and (you[1] >= all_school[a][2]):  # 先比年級跟GPA
-        compare = 0
-        for b in range(3,10):  # 語文檢定目前看到都是擇一就行
-            if you[b-1] >= float(all_school[a][b]):
-                compare += 1
-        if compare != 0:  # 如果輸入資料都大於此學校的話
-            okay.append(all_school[a])  # 就加入有達到標準的學校內
+# for a in range(len(all_school)):  # 將所有學校有小於輸入資格的都挑選出來
+#     if (you[0] >= all_school[a][1]) and (you[1] >= all_school[a][2]):  # 先比年級跟GPA
+#         compare = 0
+#         for b in range(3,10):  # 語文檢定目前看到都是擇一就行
+#             if you[b-1] >= float(all_school[a][b]):
+#                 compare += 1
+#         if compare != 0:  # 如果輸入資料都大於此學校的話
+#             okay.append(all_school[a])  # 就加入有達到標準的學校內
 
-print(okay)
+# print(okay)
+print(all_school)
