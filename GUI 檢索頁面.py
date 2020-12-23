@@ -1,28 +1,20 @@
 import tkinter as tk
 from tkinter import font as tkFont
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk  # 圖片
 class ExchangeStd (tk.Frame):
-    # shouldReset = True
     def __init__(self):
         tk.Frame.__init__(self, master=exs, bg="#E0FFFF")
         self.grid()
         self.createWidgets()
         self.variable1.trace("w", self.callback)
-        # frame.bind('<Button-1>', self.callback)
     def callback(self, *args):
         test = self.variable1.get()
         jpn = ["N1", "N2", "N3", "N4", "N5"]
         kor = ["1級", "2級", "3級", "4級", "5級", "6級"]
-        tof = ["<70", "70-79", "80-89", "90-99", ">=100"]
-        iel = ["<6.0", "6.0-7.0", ">7.0"]
+        iel = ["<6.0", "6.0", "6.5", "7.0", ">=7.5"]
         gept = ["全民英檢中級", "全民英檢中高級", "全民英檢高級"]
         fra = ["A1", "A2", "B1", "B2", "C1", "C2"]
         deu = ["A1", "A2", "B1", "B2", "C1", "C2"]
-        # if test == "無":
-        #     self.variables = tk.StringVar(self)
-        #     self.test = tk.OptionMenu(self, self.variables, *empty)
-        #     self.test.config(width=10, font=('Malgun Gothic', 12))
-        #     self.test.grid(row=10, column=3)
         if test == "日文檢定":
             self.variables = tk.StringVar(self)
             self.test = tk.OptionMenu(self, self.variables, *jpn)
@@ -35,7 +27,7 @@ class ExchangeStd (tk.Frame):
             self.test.grid(row=10, column=3)
         if test == "TOEFL iBT":
             self.variables = tk.StringVar(self)
-            self.test = tk.OptionMenu(self, self.variables, *tof)
+            self.test = tk.Text(self, height=1, width=5, bg="white")
             self.test.config(width=10, font=('Malgun Gothic', 12))
             self.test.grid(row=10, column=3)
         if test == "IELTS":
@@ -111,8 +103,11 @@ class ExchangeStd (tk.Frame):
             self.LB.delete(index)
     def addingL(self):
         want = self.variable1.get()
-        want1 = self.variables.get()
-        t = want + want1
+        if want != "TOEFL iBT":
+            want1 = self.variables.get()
+        else:
+            want1 = self.test.get("1.0", tk.END)
+        t = want + "," + want1
         self.LB1.insert("end", t)
     def deleteL(self):
         sel = self.LB1.curselection()
@@ -120,29 +115,27 @@ class ExchangeStd (tk.Frame):
             self.LB1.delete(index)
     def createWidgets(self):
         language = ["TOEFL iBT", "IELTS", "全民英檢", "日文檢定", "韓語檢定", "法語檢定", "德語檢定"]
-        imgname = Image.open("Desktop/e.png")
-        bg_color = Image.open("Desktop/bg.png")
-        country_img = Image.open("Desktop/a.png")
-        language_img = Image.open("Desktop/d.png")
-        GPA_img = Image.open("Desktop/c.png")
-        bg_color = bg_color.resize((30,30), Image.ANTIALIAS)
-        imgname = imgname.resize((50,50), Image.ANTIALIAS)
-        country_img = country_img.resize((30,30), Image.ANTIALIAS)
-        language_img = language_img.resize((30,30), Image.ANTIALIAS)
-        GPA_img = GPA_img.resize((30,30), Image.ANTIALIAS)
+        imgname = Image.open("Desktop/e.png")  # 圖片
+        country_img = Image.open("Desktop/a.png")  # 圖片
+        language_img = Image.open("Desktop/d.png")  # 圖片
+        GPA_img = Image.open("Desktop/c.png")  # 圖片
+        imgname = imgname.resize((50,50), Image.ANTIALIAS)  # 圖片
+        country_img = country_img.resize((30,30), Image.ANTIALIAS)  # 圖片
+        language_img = language_img.resize((30,30), Image.ANTIALIAS)  # 圖片
+        GPA_img = GPA_img.resize((30,30), Image.ANTIALIAS)  # 圖片
         f1 = tkFont.Font(family="微軟正黑體", size=24)
         f2 = tkFont.Font(family="微軟正黑體", size=18)
         f3 = tkFont.Font(family="Malgun Gothic", size=18)
         f4 = tkFont.Font(family="Malgun Gothic", size=14)
-        self.image = ImageTk.PhotoImage(imgname)
-        self.image1 = ImageTk.PhotoImage(country_img)
-        self.image2 = ImageTk.PhotoImage(language_img)
-        self.image3 = ImageTk.PhotoImage(GPA_img)
-        self.pic = tk.Label(self, image=self.image, bg="#E0FFFF")
-        self.picA = tk.Label(self, image=self.image, bg="#E0FFFF")
-        self.pic1 = tk.Label(self, image=self.image1, bg="#E0FFFF")
-        self.pic2 = tk.Label(self, image=self.image2, bg="#E0FFFF")
-        self.pic3 = tk.Label(self, image=self.image3, bg="#E0FFFF")
+        self.image = ImageTk.PhotoImage(imgname)  # 圖片
+        self.image1 = ImageTk.PhotoImage(country_img)  # 圖片
+        self.image2 = ImageTk.PhotoImage(language_img)  # 圖片
+        self.image3 = ImageTk.PhotoImage(GPA_img)  # 圖片
+        self.pic = tk.Label(self, image=self.image, bg="#E0FFFF")  # 圖片
+        self.picA = tk.Label(self, image=self.image, bg="#E0FFFF")  # 圖片
+        self.pic1 = tk.Label(self, image=self.image1, bg="#E0FFFF")  # 圖片
+        self.pic2 = tk.Label(self, image=self.image2, bg="#E0FFFF")  # 圖片
+        self.pic3 = tk.Label(self, image=self.image3, bg="#E0FFFF")  # 圖片
         self.label = tk.Label(self, text="台大交換生看過來", font=f1, bg="#E0FFFF")
         self.label2 = tk.Label(self, text="國家：", bg="#E0FFFF", font=f2)
         self.label4 = tk.Label(self, text="語言檢定：", bg="#E0FFFF", font=f2)
@@ -169,11 +162,11 @@ class ExchangeStd (tk.Frame):
         self.lang = tk.OptionMenu(self, self.variable1, *language, command=self.callback)
         self.lang.config(width=10, font=('Malgun Gothic', 14))
         self.lang.grid(row=10, column=2, sticky="E")
-        self.pic.grid(row=0, column=14, sticky="W")
-        self.picA.grid(row=0, column=1, sticky="E")
-        self.pic1.grid(row=1, column=0, sticky="E", padx=30)
-        self.pic2.grid(row=10, column=0, sticky="E", padx=30)
-        self.pic3.grid(row=11, column=0, sticky="E", padx=30)
+        self.pic.grid(row=0, column=14, sticky="W")  # 圖片
+        self.picA.grid(row=0, column=1, sticky="E")  # 圖片
+        self.pic1.grid(row=1, column=0, sticky="E", padx=30)  # 圖片
+        self.pic2.grid(row=10, column=0, sticky="E", padx=30)  # 圖片
+        self.pic3.grid(row=11, column=0, sticky="E", padx=30)  # 圖片
         self.LB.grid(row=2, column=13, columnspan=3, rowspan=3, sticky="E")
         self.LB1.grid(row=10, column=13, columnspan=3, rowspan=2, sticky="E")
         self.label.grid(row=0, column=2, columnspan=12,pady=20)
@@ -196,9 +189,21 @@ class ExchangeStd (tk.Frame):
         self.checkNum6.grid(row=2, column=3, padx=10, pady=1, sticky="W")
         self.checkNum7.grid(row=3, column=3, padx=10, pady=1, sticky="W")
     def clickBtn(self):
-        self.txtNum_GPA.get("1.0", tk.END)  # GPA
-        value = self.LB.get(self.LB.curselection())
-        value1 = self.LB1.get(self.LB1.curselection())
+        level_dict = {"A1":1, "A2":2, "B1":3, "B2":4, "C1":5, "C2":6, "N1":-1, "N2":-2, "N3":-3, "N4":-4, "N5":-5, "1級":1, "2級":2, "3級":3, "4級":4, "5級":5, "6級":6, "<6.0":5.9, "6.0":6.0, "6.5":6.5, "7.0":7.0, ">=7.5":7.5}
+        GPA = self.txtNum_GPA.get("1.0", tk.END)
+        valueidx = list(self.LB.get(0, "end"))
+        valueidx1 = list(self.LB1.get(0, "end"))
+        new = []
+        for i in valueidx1:
+            x = i.split(",")
+            new.append(x)
+        for j in new:
+            level = str(j[1])
+            if level in level_dict:
+                num = level_dict[level]
+                j[1] = num
+            else:
+                j[1] = int(j[1].strip("\n"))
 exs = tk.Tk()
 exs.geometry("900x900")  # 視窗大小
 exs.resizable(0, 0)
