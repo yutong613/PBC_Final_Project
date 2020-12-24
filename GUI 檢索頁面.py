@@ -18,7 +18,7 @@ class ExchangeStd (tk.Frame):
         if test == "日文檢定":
             self.variables = tk.StringVar(self)
             self.test = tk.OptionMenu(self, self.variables, *jpn)
-            self.test.config(width=10, font=('Malgun Gothic', 12))
+            self.test.config(width=8, font=('Malgun Gothic', 12))
             self.test.grid(row=10, column=3)
         if test == "韓語檢定":
             self.variables = tk.StringVar(self)
@@ -27,28 +27,28 @@ class ExchangeStd (tk.Frame):
             self.test.grid(row=10, column=3)
         if test == "TOEFL iBT":
             self.variables = tk.StringVar(self)
-            self.test = tk.Text(self, height=1, width=5, bg="white")
-            self.test.config(width=10, font=('Malgun Gothic', 12))
+            self.test = tk.Text(self, height=1, width=20, bg="white")
+            self.test.config(width=8, font=('Malgun Gothic', 12))
             self.test.grid(row=10, column=3)
         if test == "IELTS":
             self.variables = tk.StringVar(self)
             self.test = tk.OptionMenu(self, self.variables, *iel)
-            self.test.config(width=10, font=('Malgun Gothic', 12))
+            self.test.config(width=8, font=('Malgun Gothic', 12))
             self.test.grid(row=10, column=3)
         if test == "全民英檢":
             self.variables = tk.StringVar(self)
             self.test = tk.OptionMenu(self, self.variables, *gept)
-            self.test.config(width=10, font=('Malgun Gothic', 12))
-            self.test.grid(row=10, column=3)
+            self.test.config(width=11, font=('Malgun Gothic', 10))
+            self.test.grid(row=10, column=3, sticky="W")
         if test == "法語檢定":
             self.variables = tk.StringVar(self)
             self.test = tk.OptionMenu(self, self.variables, *fra)
-            self.test.config(width=10, font=('Malgun Gothic', 12))
+            self.test.config(width=8, font=('Malgun Gothic', 12))
             self.test.grid(row=10, column=3)
         if test == "德語檢定":
             self.variables = tk.StringVar(self)
             self.test = tk.OptionMenu(self, self.variables, *deu)
-            self.test.config(width=10, font=('Malgun Gothic', 12))
+            self.test.config(width=8, font=('Malgun Gothic', 12))
             self.test.grid(row=10, column=3)
     def select(self, *args):
         country = self.var1.get()
@@ -62,37 +62,37 @@ class ExchangeStd (tk.Frame):
         if country == 1:
             self.var = tk.StringVar(self)
             self.choice = tk.OptionMenu(self, self.var, *asia)
-            self.choice.config(width=10, font=('Malgun Gothic', 12))
+            self.choice.config(width=8, font=('Malgun Gothic', 12))
             self.choice.grid(row=4, column=3)
         if country == 2:
             self.var = tk.StringVar(self)
             self.toefl = tk.OptionMenu(self, self.var, *europeW)
-            self.toefl.config(width=10, font=('Malgun Gothic', 12))
+            self.toefl.config(width=8, font=('Malgun Gothic', 12))
             self.toefl.grid(row=4, column=3)
         if country == 3:
             self.var = tk.StringVar(self)
             self.toefl = tk.OptionMenu(self, self.var, *europeS)
-            self.toefl.config(width=10, font=('Malgun Gothic', 12))
+            self.toefl.config(width=8, font=('Malgun Gothic', 12))
             self.toefl.grid(row=4, column=3)
         if country == 4:
             self.var = tk.StringVar(self)
             self.toefl = tk.OptionMenu(self, self.var, *europeE)
-            self.toefl.config(width=10, font=('Malgun Gothic', 12))
+            self.toefl.config(width=8, font=('Malgun Gothic', 12))
             self.toefl.grid(row=4, column=3)
         if country == 5:
             self.var = tk.StringVar(self)
             self.toefl = tk.OptionMenu(self, self.var, *europeN)
-            self.toefl.config(width=10, font=('Malgun Gothic', 12))
+            self.toefl.config(width=8, font=('Malgun Gothic', 12))
             self.toefl.grid(row=4, column=3)
         if country == 6:
             self.var = tk.StringVar(self)
             self.toefl = tk.OptionMenu(self, self.var, *america)
-            self.toefl.config(width=10, font=('Malgun Gothic', 12))
+            self.toefl.config(width=8, font=('Malgun Gothic', 12))
             self.toefl.grid(row=4, column=3)
         if country == 7:
             self.var = tk.StringVar(self)
             self.toefl = tk.OptionMenu(self, self.var, *other)
-            self.toefl.config(width=10, font=('Malgun Gothic', 12))
+            self.toefl.config(width=8, font=('Malgun Gothic', 12))
             self.toefl.grid(row=4, column=3)
     def addingC(self):
         want = self.var.get()
@@ -120,9 +120,9 @@ class ExchangeStd (tk.Frame):
         language_img = Image.open("Desktop/d.png")  # 圖片
         GPA_img = Image.open("Desktop/c.png")  # 圖片
         imgname = imgname.resize((50,50), Image.ANTIALIAS)  # 圖片
-        country_img = country_img.resize((30,30), Image.ANTIALIAS)  # 圖片
-        language_img = language_img.resize((30,30), Image.ANTIALIAS)  # 圖片
-        GPA_img = GPA_img.resize((30,30), Image.ANTIALIAS)  # 圖片
+        country_img = country_img.resize((40,40), Image.ANTIALIAS)  # 圖片
+        language_img = language_img.resize((40,40), Image.ANTIALIAS)  # 圖片
+        GPA_img = GPA_img.resize((40,40), Image.ANTIALIAS)  # 圖片
         f1 = tkFont.Font(family="微軟正黑體", size=24)
         f2 = tkFont.Font(family="微軟正黑體", size=18)
         f3 = tkFont.Font(family="Malgun Gothic", size=18)
@@ -141,14 +141,14 @@ class ExchangeStd (tk.Frame):
         self.label4 = tk.Label(self, text="語言檢定：", bg="#E0FFFF", font=f2)
         self.label5 = tk.Label(self, text="GPA：", bg="#E0FFFF", font=f3)
         self.label6 = tk.Label(self, text="已選國家", bg="#E0FFFF", font=f3)
-        self.label7 = tk.Label(self, text="已選語言檢定", bg="#E0FFFF", font=f3)
+        self.label7 = tk.Label(self, text="已選語檢", bg="#E0FFFF", font=f3)
         self.button = tk.Button(self, text = "Search", bg="white", activebackground="yellow", command=self.clickBtn, font=f3)
         self.LB1 = tk.Listbox(self)
-        self.LB_ad1 = tk.Button(self, text="+", width=3, command=self.addingL, font=f4)
-        self.LB_de1 = tk.Button(self, text="-", width=3, command=self.deleteL, font=f4)
+        self.LB_ad1 = tk.Button(self, text="+", width=3, activebackground="yellow", command=self.addingL, font=f4)
+        self.LB_de1 = tk.Button(self, text="-", width=3, activebackground="yellow", command=self.deleteL, font=f4)
         self.LB = tk.Listbox(self)
-        self.LB_ad = tk.Button(self, text="+", width=3, command=self.addingC, font=f4)
-        self.LB_de = tk.Button(self, text="-", width=3, command=self.deleteC, font=f4)
+        self.LB_ad = tk.Button(self, text="+", width=3, activebackground="yellow", command=self.addingC, font=f4)
+        self.LB_de = tk.Button(self, text="-", width=3, activebackground="yellow", command=self.deleteC, font=f4)
         self.txtNum_GPA = tk.Text(self, height=1, width=5, bg="white", font=f2)
         self.var1 = tk.IntVar(self)
         self.checkNum1 = tk.Checkbutton(self, text="亞洲", variable=self.var1, offvalue=0, onvalue=1, height=1, width=5, bg="#E0FFFF", command=self.select, font=f2)
@@ -160,21 +160,21 @@ class ExchangeStd (tk.Frame):
         self.checkNum7 = tk.Checkbutton(self, text="其他", variable=self.var1, offvalue=0, onvalue=7, height=1, width=5, bg="#E0FFFF", command=self.select, font=f2)
         self.variable1 = tk.StringVar(self)
         self.lang = tk.OptionMenu(self, self.variable1, *language, command=self.callback)
-        self.lang.config(width=10, font=('Malgun Gothic', 14))
-        self.lang.grid(row=10, column=2, sticky="E")
+        self.lang.config(width=8, font=('Malgun Gothic', 12))
+        self.lang.grid(row=10, column=2, sticky="W")
         self.pic.grid(row=0, column=14, sticky="W")  # 圖片
-        self.picA.grid(row=0, column=1, sticky="E")  # 圖片
+        self.picA.grid(row=0, column=2, sticky="W")  # 圖片
         self.pic1.grid(row=1, column=0, sticky="E", padx=30)  # 圖片
         self.pic2.grid(row=10, column=0, sticky="E", padx=30)  # 圖片
         self.pic3.grid(row=11, column=0, sticky="E", padx=30)  # 圖片
         self.LB.grid(row=2, column=13, columnspan=3, rowspan=3, sticky="E")
         self.LB1.grid(row=10, column=13, columnspan=3, rowspan=2, sticky="E")
-        self.label.grid(row=0, column=2, columnspan=12,pady=20)
+        self.label.grid(row=0, column=2, columnspan=13,pady=20)
         self.label2.grid(row=1, column=1, sticky="E", padx=10)
         self.label4.grid(row=10, column=1, sticky="E", padx=10)
         self.label5.grid(row=11, column=1, sticky="E", padx=10)
-        self.label6.grid(row=1, column=13, pady=5, sticky="W", padx=10)
-        self.label7.grid(row=9, column=13, pady=5, sticky="W")
+        self.label6.grid(row=1, column=13, pady=5, sticky="E", padx=10)
+        self.label7.grid(row=9, column=13, pady=5, sticky="E", padx=10)
         self.button.grid(row=14, padx=20, pady=20, column=3, sticky="W")
         self.LB_ad1.grid(row=10, padx=5, column=16, sticky="W"+"S")
         self.LB_de1.grid(row=11, padx=5, column=16, sticky="W")
@@ -189,7 +189,7 @@ class ExchangeStd (tk.Frame):
         self.checkNum6.grid(row=2, column=3, padx=10, pady=1, sticky="W")
         self.checkNum7.grid(row=3, column=3, padx=10, pady=1, sticky="W")
     def clickBtn(self):
-        level_dict = {"A1":1, "A2":2, "B1":3, "B2":4, "C1":5, "C2":6, "N1":-1, "N2":-2, "N3":-3, "N4":-4, "N5":-5, "1級":1, "2級":2, "3級":3, "4級":4, "5級":5, "6級":6, "<6.0":5.9, "6.0":6.0, "6.5":6.5, "7.0":7.0, ">=7.5":7.5}
+        level_dict = {"A1":1, "A2":2, "B1":3, "B2":4, "C1":5, "C2":6, "N1":-1, "N2":-2, "N3":-3, "N4":-4, "N5":-5, "1級":1, "2級":2, "3級":3, "4級":4, "5級":5, "6級":6, "<6.0":5.9, "6.0":6.0, "6.5":6.5, "7.0":7.0, ">=7.5":7.5, "全民英檢中高級":2, "全民英檢中級":1, "全民英檢高級":3}
         GPA = self.txtNum_GPA.get("1.0", tk.END)
         valueidx = list(self.LB.get(0, "end"))
         valueidx1 = list(self.LB1.get(0, "end"))
