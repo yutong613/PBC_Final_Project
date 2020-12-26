@@ -205,10 +205,9 @@ class ExchangeStd (tk.Frame):
         grade_dict = {"大二":2, "大三":3, "大四":4, "大五":5, "碩一":6, "碩二":7, "碩三":8, "博一":9, "博二":10, "博三":11, "博四":12, "博五":13, "博六":14}
         gradevalue = self.variable2.get()
         GPA = self.txtNum_GPA.get("1.0", tk.END)
-        valueidx = list(self.LB.get(0, "end"))
+        valueidx = list(self.LB.get(0, "end"))  # 國家
         valueidx1 = list(self.LB1.get(0, "end"))
         new = []
-        new_grade = grade_dict[gradevalue]
         for i in valueidx1:
             x = i.split(",")
             new.append(x)
@@ -219,7 +218,89 @@ class ExchangeStd (tk.Frame):
                 j[1] = num
             else:
                 j[1] = int(j[1].strip("\n"))
+        
+                test = []
+        # 這邊開始是編成一個輸入的list
+        for i in range(9):
+            test.append(0)
+        
+        try:
+            test[0] = grade_dict[gradevalue]
+        except KeyError:
+            test[0] = 100
+        
+        try:
+            test[1] = float(GPA.strip("\n"))
+        except ValueError:
+            test[1] = 100
+            
+        for i in valueidx1:
+            temp = i.split(",")
 
+            if temp[0] == "TOEFL iBT":
+                test[2] = float(temp[1].strip("\n"))
+
+            elif temp[0] == "IELTS":
+                test[3] = float(level_dict[temp[1].strip("\n")])
+
+            elif temp[0] == "全民英檢":
+                temp[1].strip("\n")
+                test[4] = level_dict[temp[1]]
+
+            elif temp[0] == "日文檢定":
+                temp[1].strip("\n")
+                test[5] = level_dict[temp[1]]
+            
+            elif temp[0] == "韓語檢定":
+                temp[1].strip("\n")
+                test[6] = level_dict[temp[1]]
+
+            elif temp[0] == "法語檢定":
+                temp[1].strip("\n")
+                test[7] = level_dict[temp[1]]
+
+            elif temp[0] == "德語檢定":
+                temp[1].strip("\n")
+                test[8] = level_dict[temp[1]]
+                
+        # print(test,valueidx)  # 看編成list的測資有無錯誤
+        
+        test = test.split(",")
+        valueidx = valueidx.split(",") 
+        
+        for i in range(len(test)):
+            test[i] = float(test[i])  # 將數值浮點數化
+
+        okay = []  # 有達到標準的學校
+
+        all_school.pop(161)  # 因為今年不招收學生
+
+        for a in range(len(all_school)):  # 將所有學校有小於輸入資格的都挑選出來
+            if valueidx != [""]:
+                for r in valueidx:
+                    if all_school[a][10] == r:
+                        if (test[0] >= all_school[a][1]) and (test[1] >= all_school[a][2]):  # 先比年級跟GPA
+                            compare = 0
+                            for b in range(3,10):  # 語文檢定目前看到都是擇一就行
+                                if test[b-1] >= float(all_school[a][b]):
+                                    compare += 1
+                            if compare != 0:  # 如果輸入資料都大於此學校的話
+                                okay.append(a)  # 就加入有達到標準的學校內
+            else:
+                if (test[0] >= all_school[a][1]) and (test[1] >= all_school[a][2]):  # 先比年級跟GPA
+                    compare = 0
+                    for b in range(3,10):  # 語文檢定目前看到都是擇一就行
+                        if test[b-1] >= float(all_school[a][b]):
+                            compare += 1
+                    if compare != 0:  # 如果輸入資料都大於此學校的話
+                        okay.append(a)  # 就加入有達到標準的學校內                  
+        print(okay)
+        output = []
+        for i in okay:
+            output.append(school_info[i])
+
+        print(output)
+   
 exs = tk.Tk()
 exs.geometry("900x900")  # 視窗大小
 exs.resizable(0, 0)
