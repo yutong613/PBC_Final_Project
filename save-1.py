@@ -3,7 +3,7 @@
 
 import tkinter as tk
 from tkinter import font as tkFont
-# from PIL import Image, ImageTk  # 圖片
+from PIL import Image, ImageTk  # 圖片
 class ExchangeStd (tk.Frame):
     def __init__(self):
         tk.Frame.__init__(self, master=exs, bg="#E0FFFF")
@@ -119,31 +119,31 @@ class ExchangeStd (tk.Frame):
     def createWidgets(self):
         grade = ["大二", "大三", "大四", "大五", "碩一", "碩二", "碩三", "博一", "博二", "博三", "博四", "博五", "博六"] 
         language = ["TOEFL iBT", "IELTS", "全民英檢", "日文檢定", "韓語檢定", "法語檢定", "德語檢定"]
-        # imgname = Image.open("Desktop/e.png")  # 圖片
-        # country_img = Image.open("Desktop/a.png")  # 圖片
-        # language_img = Image.open("Desktop/d.png")  # 圖片
-        # GPA_img = Image.open("Desktop/c.png")  # 圖片
-        # grade_img = Image.open("Desktop/b.png")  # 圖片
-        # imgname = imgname.resize((50,50), Image.ANTIALIAS)  # 圖片
-        # country_img = country_img.resize((40,40), Image.ANTIALIAS)  # 圖片
-        # language_img = language_img.resize((40,40), Image.ANTIALIAS)  # 圖片
-        # GPA_img = GPA_img.resize((40,40), Image.ANTIALIAS)  # 圖片
-        # grade_img = grade_img.resize((40,40), Image.ANTIALIAS)  # 圖片
+        imgname = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/e.png")  # 圖片
+        country_img = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/a.png")  # 圖片
+        language_img = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/d.png")  # 圖片
+        GPA_img = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/c.png")  # 圖片
+        grade_img = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/b.png")  # 圖片
+        imgname = imgname.resize((50,50), Image.ANTIALIAS)  # 圖片
+        country_img = country_img.resize((40,40), Image.ANTIALIAS)  # 圖片
+        language_img = language_img.resize((40,40), Image.ANTIALIAS)  # 圖片
+        GPA_img = GPA_img.resize((40,40), Image.ANTIALIAS)  # 圖片
+        grade_img = grade_img.resize((40,40), Image.ANTIALIAS)  # 圖片
         f1 = tkFont.Font(family="微軟正黑體", size=24)
         f2 = tkFont.Font(family="微軟正黑體", size=18)
         f3 = tkFont.Font(family="Malgun Gothic", size=18)
         f4 = tkFont.Font(family="Malgun Gothic", size=14)
-        # self.image = ImageTk.PhotoImage(imgname)  # 圖片
-        # self.image1 = ImageTk.PhotoImage(country_img)  # 圖片
-        # self.image2 = ImageTk.PhotoImage(language_img)  # 圖片
-        # self.image3 = ImageTk.PhotoImage(GPA_img)  # 圖片
-        # self.image4 = ImageTk.PhotoImage(grade_img)  # 圖片
-        # self.pic = tk.Label(self, image=self.image, bg="#E0FFFF")  # 圖片
-        # self.picA = tk.Label(self, image=self.image, bg="#E0FFFF")  # 圖片
-        # self.pic1 = tk.Label(self, image=self.image1, bg="#E0FFFF")  # 圖片
-        # self.pic2 = tk.Label(self, image=self.image2, bg="#E0FFFF")  # 圖片
-        # self.pic3 = tk.Label(self, image=self.image3, bg="#E0FFFF")  # 圖片
-        # self.pic4 = tk.Label(self, image=self.image4, bg="#E0FFFF")  # 圖片
+        self.image = ImageTk.PhotoImage(imgname)  # 圖片
+        self.image1 = ImageTk.PhotoImage(country_img)  # 圖片
+        self.image2 = ImageTk.PhotoImage(language_img)  # 圖片
+        self.image3 = ImageTk.PhotoImage(GPA_img)  # 圖片
+        self.image4 = ImageTk.PhotoImage(grade_img)  # 圖片
+        self.pic = tk.Label(self, image=self.image, bg="#E0FFFF")  # 圖片
+        self.picA = tk.Label(self, image=self.image, bg="#E0FFFF")  # 圖片
+        self.pic1 = tk.Label(self, image=self.image1, bg="#E0FFFF")  # 圖片
+        self.pic2 = tk.Label(self, image=self.image2, bg="#E0FFFF")  # 圖片
+        self.pic3 = tk.Label(self, image=self.image3, bg="#E0FFFF")  # 圖片
+        self.pic4 = tk.Label(self, image=self.image4, bg="#E0FFFF")  # 圖片
         self.label = tk.Label(self, text="台大交換生看過來", font=f1, bg="#E0FFFF")
         self.label2 = tk.Label(self, text="國家：", bg="#E0FFFF", font=f2)
         self.label4 = tk.Label(self, text="語言檢定：", bg="#E0FFFF", font=f2)
@@ -175,12 +175,12 @@ class ExchangeStd (tk.Frame):
         self.gra = tk.OptionMenu(self, self.variable2, *grade)
         self.gra.config(width=8, font=('Malgun Gothic', 12))
         self.gra.grid(row=12, column=2, sticky="W")
-        # self.pic.grid(row=0, column=14, sticky="W")  # 圖片
-        # self.picA.grid(row=0, column=2, sticky="W")  # 圖片
-        # self.pic1.grid(row=1, column=0, sticky="E", padx=30)  # 圖片
-        # self.pic2.grid(row=10, column=0, sticky="E", padx=30)  # 圖片
-        # self.pic3.grid(row=11, column=0, sticky="E", padx=30)  # 圖片
-        # self.pic4.grid(row=12, column=0, sticky="E", padx=30)  # 圖片
+        self.pic.grid(row=0, column=14, sticky="W")  # 圖片
+        self.picA.grid(row=0, column=2, sticky="W")  # 圖片
+        self.pic1.grid(row=1, column=0, sticky="E", padx=30)  # 圖片
+        self.pic2.grid(row=10, column=0, sticky="E", padx=30)  # 圖片
+        self.pic3.grid(row=11, column=0, sticky="E", padx=30)  # 圖片
+        self.pic4.grid(row=12, column=0, sticky="E", padx=30)  # 圖片
         self.LB.grid(row=2, column=13, columnspan=3, rowspan=3, sticky="E")
         self.LB1.grid(row=10, column=13, columnspan=3, rowspan=2, sticky="E")
         self.label.grid(row=0, column=2, columnspan=13,pady=20)
@@ -278,7 +278,7 @@ class ExchangeStd (tk.Frame):
         okay = []  # 有達到標準的學校
 
         all_school.pop(161)  # 因為今年不招收學生
-        
+        schoo_info.pop(161)
         for a in range(len(all_school)):  # 將所有學校有小於輸入資格的都挑選出來
             if valueidx != [""]:
                 for r in valueidx:
@@ -331,7 +331,7 @@ class ExchangeStd (tk.Frame):
                 tk.Frame.config(self,bg="#E0FFFF")
                 tk.Label(self, text="您錄取的學校", font=('微軟正黑體', 24, "bold"), bg="#E0FFFF").pack(side="top", fill="x")
                 for i in range(len(output)):
-                    #self.button = tk.Button(self, text="go",command=lambda: master.switch_frame(PageOne))
+                    self.button = tk.Button(self, text="go",command=lambda: master.switch_frame(PageOne))
                     self.button = tk.Button(self, text=output[i][0], command= lambda i=i:[self.open_this(i), master.switch_frame(PageOne)])
                     self.button.pack()
             def open_this(self, myNum):
