@@ -4,10 +4,10 @@ import bs4
 import re
 import csv
 
-# 抓取國際處交換學校一覽表的原始網頁
 ssl._create_default_https_context = ssl._create_unverified_context
-url = "https://oia.ntu.edu.tw/ch/outgoing/school.list/country_sn/0"  # 國際處出國交換學校一覽表的網址
-with req.urlopen(url) as response:  # 讀取
+url = "https://oia.ntu.edu.tw/ch/outgoing/school.list/country_sn/0"  # 國際處出國交換學校一覽表的網頁
+
+with req.urlopen(url) as response:
     data = response.read().decode("utf-8")
 
 root = bs4.BeautifulSoup(data, "html.parser")
@@ -104,21 +104,19 @@ country_dict.update(country_dict41)
 country_dict42 = dict.fromkeys(["開普敦大學", "斯泰倫博斯大學"], "南非")
 country_dict.update(country_dict42)
 
-all_school = []  # 總資料庫
-
-# 尋找所有class="_decoration"的 td 標籤
 urls = root.find_all("td", class_="_decoration")        
 
-# 解析原始碼，取得每間學校的網址，並進入該網址取得詳細資料
+all_school = []  # 總資料庫
+ 
 for url in urls:
-    url = "https://oia.ntu.edu.tw"+url.a["href"]  # 各個學校的申請資料的網址
+    url = "https://oia.ntu.edu.tw"+url.a["href"]  # 各個學校的申請資料網頁
     with req.urlopen(url) as response:
         data = response.read().decode("utf-8")
     root = bs4.BeautifulSoup(data, "html.parser")
 
-    school_name = root.find("h1")  # 尋找校名的標籤
-    titles = root.find_all("th")  # 尋找申請資料項目的標籤：申請資格、名額、學校年曆、註冊繳費、注意事項、住宿資訊
-    infos = root.find_all("td")  # 尋找申請資料項目的內容的標籤
+    school_name = root.find("h1")  # 校名
+    titles = root.find_all("th")  # 申請資料項目：申請資格、名額、學校年曆、註冊繳費、注意事項、住宿資訊
+    infos = root.find_all("td")  # 申請資料項目的內容
     select = infos[0].text.strip()
    
     qualify = select.split("組")  # 以組分類
