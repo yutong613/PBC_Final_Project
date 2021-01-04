@@ -119,11 +119,11 @@ class ExchangeStd (tk.Frame):
     def createWidgets(self):
         grade = ["大二", "大三", "大四", "大五", "碩一", "碩二", "碩三", "博一", "博二", "博三", "博四", "博五", "博六"] 
         language = ["TOEFL iBT", "IELTS", "全民英檢", "日文檢定", "韓語檢定", "法語檢定", "德語檢定"]
-        imgname = Image.open("Desktop/e.png")  # 圖片
-        country_img = Image.open("Desktop/a.png")  # 圖片
-        language_img = Image.open("Desktop/d.png")  # 圖片
-        GPA_img = Image.open("Desktop/c.png")  # 圖片
-        grade_img = Image.open("Desktop/b.png")  # 圖片
+        imgname = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/e.png")  # 圖片
+        country_img = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/a.png")  # 圖片
+        language_img = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/d.png")  # 圖片
+        GPA_img = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/c.png")  # 圖片
+        grade_img = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/b.png")  # 圖片
         imgname = imgname.resize((50,50), Image.ANTIALIAS)  # 圖片
         country_img = country_img.resize((40,40), Image.ANTIALIAS)  # 圖片
         language_img = language_img.resize((40,40), Image.ANTIALIAS)  # 圖片
@@ -278,6 +278,7 @@ class ExchangeStd (tk.Frame):
         okay = []  # 有達到標準的學校
 
         all_school.pop(161)  # 因為今年不招收學生
+        schoo_info.pop(161)
         
         for a in range(len(all_school)):  # 將所有學校有小於輸入資格的都挑選出來
             if valueidx != [""]:
