@@ -119,11 +119,11 @@ class ExchangeStd (tk.Frame):
     def createWidgets(self):
         grade = ["大二", "大三", "大四", "大五", "碩一", "碩二", "碩三", "博一", "博二", "博三", "博四", "博五", "博六"] 
         language = ["TOEFL iBT", "IELTS", "全民英檢", "日文檢定", "韓語檢定", "法語檢定", "德語檢定"]
-        imgname = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/e.png")  # 圖片
-        country_img = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/a.png")  # 圖片
-        language_img = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/d.png")  # 圖片
-        GPA_img = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/c.png")  # 圖片
-        grade_img = Image.open("/Users/eva_shao/Documents/GitHub/PBC_Final_Project/b.png")  # 圖片
+        imgname = Image.open("Desktop/e.png")  # 圖片
+        country_img = Image.open("Desktop/a.png")  # 圖片
+        language_img = Image.open("Desktop/d.png")  # 圖片
+        GPA_img = Image.open("Desktop/c.png")  # 圖片
+        grade_img = Image.open("Desktop/b.png")  # 圖片
         imgname = imgname.resize((50,50), Image.ANTIALIAS)  # 圖片
         country_img = country_img.resize((40,40), Image.ANTIALIAS)  # 圖片
         language_img = language_img.resize((40,40), Image.ANTIALIAS)  # 圖片
@@ -278,7 +278,7 @@ class ExchangeStd (tk.Frame):
         okay = []  # 有達到標準的學校
 
         all_school.pop(161)  # 因為今年不招收學生
-        schoo_info.pop(161)
+        
         for a in range(len(all_school)):  # 將所有學校有小於輸入資格的都挑選出來
             if valueidx != [""]:
                 for r in valueidx:
@@ -331,7 +331,7 @@ class ExchangeStd (tk.Frame):
                 tk.Frame.config(self,bg="#E0FFFF")
                 tk.Label(self, text="您錄取的學校", font=('微軟正黑體', 24, "bold"), bg="#E0FFFF").pack(side="top", fill="x")
                 for i in range(len(output)):
-                    self.button = tk.Button(self, text="go",command=lambda: master.switch_frame(PageOne))
+                    #self.button = tk.Button(self, text="go",command=lambda: master.switch_frame(PageOne))
                     self.button = tk.Button(self, text=output[i][0], command= lambda i=i:[self.open_this(i), master.switch_frame(PageOne)])
                     self.button.pack()
             def open_this(self, myNum):
@@ -342,6 +342,8 @@ class ExchangeStd (tk.Frame):
                 global university_content_4
                 global university_content_5
                 global university_content_6
+                #global university_list
+                #university_list = []
                 university_name = output[myNum][0]
                 university_content_1 = output[myNum][1]
                 university_content_2 = output[myNum][2]
@@ -357,20 +359,19 @@ class ExchangeStd (tk.Frame):
             def __init__(self, master):
                 tk.Frame.__init__(self, master)
                 tk.Frame.config(self,bg="#E0FFFF")
-                tk.Label(self, text=university_name, font=('Malgun Gothic', 14, "bold"), bg="#E0FFFF").pack(side="top", fill="x")
-                tk.Label(self, text=university_content_1, font=('微軟正黑體', 14, "bold"), bg="#E0FFFF").pack()
-                tk.Label(self, text=university_content_2, font=('微軟正黑體', 14, "bold"), bg="#E0FFFF").pack()
-                tk.Label(self, text=university_content_3, font=('微軟正黑體', 14, "bold"), bg="#E0FFFF").pack()
-                tk.Label(self, text=university_content_4, font=('微軟正黑體', 14, "bold"), bg="#E0FFFF").pack()
-                tk.Label(self, text=university_content_5, font=('微軟正黑體', 14, "bold"), bg="#E0FFFF").pack()
-                tk.Label(self, text=university_content_6, font=('微軟正黑體', 14, "bold"), bg="#E0FFFF").pack()
-                tk.Button(self, text="Go back to start page",
-                          command=lambda: master.switch_frame(StartPage)).pack(side = "bottom")
+                tk.Label(self, text=university_name, font=('Malgun Gothic', 20, "bold"), bg="#E0FFFF").pack(side="top", fill="x")
+                tk.Button(self, text="Go back to start page",command=lambda: master.switch_frame(StartPage)).pack(side = "bottom")
+                tk.Message(self, text=university_content_1, font=('微軟正黑體', 14, "bold"), bg="#E0FFFF", width=900, justify="center").pack()
+                tk.Message(self, text=university_content_2, font=('微軟正黑體', 14, "bold"), bg="#E0FFFF", width=900, justify="center").pack()
+                tk.Message(self, text=university_content_3, font=('微軟正黑體', 14, "bold"), bg="#E0FFFF", width=900, justify="center").pack()
+                tk.Message(self, text=university_content_4, font=('微軟正黑體', 14, "bold"), bg="#E0FFFF", width=900, justify="center").pack()
+                tk.Message(self, text=university_content_5, font=('微軟正黑體', 14, "bold"), bg="#E0FFFF", width=900, justify="center").pack()
+                tk.Message(self, text=university_content_6, font=('微軟正黑體', 14, "bold"), bg="#E0FFFF", width=900, justify="center").pack()
 
 
         if __name__ == "__main__":
             app = SampleApp()
-            app.geometry("400x250")
+            app.geometry("900x900")
             app.config(bg="#E0FFFF")
             app.mainloop()
 
